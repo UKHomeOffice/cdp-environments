@@ -18,13 +18,11 @@ pipeline:
       - kube_token
       - github_ssh_key_cdp_deploy
     commands:
-      - export DEPLOY_TO="${DEPLOY_TO:-${DEFAULT_ENVIRONMENT}}"
-      - ./deploy.sh
+      - deploy.sh . ${DEFAULT_ENVIRONMENT}
+      - test.sh . ${DEFAULT_ENVIRONMENT}
     when:
-      repo: 
-        - github.com/UKHomeOffice/cdp-deployment-templates
-      event: push
-      branch: [master]
+      event: [push, deployment]
+      # branch: [master]
 
   notify_slack_success_push:
     image: plugins/slack:1.2
