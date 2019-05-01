@@ -19,13 +19,11 @@ pipeline:
     secrets:
       - kube_server
       - kube_token
-    envrironment:
-      - PERF_TEST_NAME=${PERF_TEST_NAME}
     commands:
       - sed -i 's?#!/bin/bash?#!/bin/bash -x?g' /usr/bin/run-operation.sh /usr/bin/deploy.sh /usr/bin/test.sh 
       - echo `pwd`
       - which deploy.sh
-      - /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
+      - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
       # branch: [master]
@@ -35,12 +33,10 @@ pipeline:
     secrets:
       - kube_server
       - kube_token
-    envrironment:
-      - PERF_TEST_NAME=${PERF_TEST_NAME}
     commands:
       - echo `pwd`
       - which test.sh
-      - /usr/bin/test.sh `pwd` ${DEFAULT_ENVIRONMENT}
+      - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/test.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
       # branch: [master]
