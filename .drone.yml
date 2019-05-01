@@ -18,8 +18,22 @@ pipeline:
       - kube_token
       - github_ssh_key_cdp_deploy
     commands:
-      - deploy.sh . ${DEFAULT_ENVIRONMENT}
-      - test.sh . ${DEFAULT_ENVIRONMENT}
+      - echo `pwd`
+      - which deploy.sh
+      - /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
+    when:
+      event: [push, deployment]
+      # branch: [master]
+
+  perf_test:
+    image: quay.io/ukhomeofficedigital/cdp-ci:latest
+    secrets:
+      - kube_token
+      - github_ssh_key_cdp_deploy
+    commands:
+      - echo `pwd`
+      - which test.sh
+      - /usr/bin/test.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
       # branch: [master]
