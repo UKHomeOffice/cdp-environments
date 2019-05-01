@@ -13,7 +13,7 @@ matrix:
 
 pipeline:
   deploy:
-    image: quay.io/ukhomeofficedigital/cdp-ci:0.4.1
+    image: quay.io/ukhomeofficedigital/cdp-ci:latest
     secrets:
       - kube_token
       - github_ssh_key_cdp_deploy
