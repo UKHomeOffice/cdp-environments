@@ -15,9 +15,10 @@ pipeline:
   deploy:
     image: quay.io/ukhomeofficedigital/cdp-ci:latest
     secrets:
+      - kube_server
       - kube_token
-      - github_ssh_key_cdp_deploy
     commands:
+      - sed -i 's?#!/bin/bash?#!/bin/bash -x?g' /usr/bin/run-operation.sh /usr/bin/deploy.sh /usr/bin/test.sh 
       - echo `pwd`
       - which deploy.sh
       - /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
@@ -28,8 +29,8 @@ pipeline:
   perf_test:
     image: quay.io/ukhomeofficedigital/cdp-ci:latest
     secrets:
+      - kube_server
       - kube_token
-      - github_ssh_key_cdp_deploy
     commands:
       - echo `pwd`
       - which test.sh
