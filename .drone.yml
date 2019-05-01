@@ -10,6 +10,8 @@ matrix:
     - https://avatars.slack-edge.com/2019-03-25/588775175286_f3831480e0ca04ab5358_48.png
   SLACK_NOTICE_USERNAME:
     - Drone
+  PERF_TEST_NAME:
+    - e2e-deploy-perf-test
 
 pipeline:
   deploy:
@@ -17,6 +19,8 @@ pipeline:
     secrets:
       - kube_server
       - kube_token
+    envrironment:
+      - PERF_TEST_NAME=${PERF_TEST_NAME}
     commands:
       - sed -i 's?#!/bin/bash?#!/bin/bash -x?g' /usr/bin/run-operation.sh /usr/bin/deploy.sh /usr/bin/test.sh 
       - echo `pwd`
@@ -31,6 +35,8 @@ pipeline:
     secrets:
       - kube_server
       - kube_token
+    envrironment:
+      - PERF_TEST_NAME=${PERF_TEST_NAME}
     commands:
       - echo `pwd`
       - which test.sh
