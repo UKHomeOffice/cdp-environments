@@ -24,7 +24,7 @@ pipeline:
       repo: 
         - github.com/UKHomeOffice/cdp-deployment-templates
       event: push
-      branch: [master, CDMP-2264]
+      branch: [master]
 
   notify_slack_success_push:
     image: plugins/slack:1.2
