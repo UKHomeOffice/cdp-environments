@@ -20,9 +20,6 @@ pipeline:
       - kube_server
       - kube_token
     commands:
-      - sed -i 's?#!/bin/bash?#!/bin/bash -x?g' /usr/bin/run-operation.sh /usr/bin/deploy.sh /usr/bin/test.sh 
-      - echo `pwd`
-      - which deploy.sh
       - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
@@ -34,8 +31,6 @@ pipeline:
       - kube_server
       - kube_token
     commands:
-      - echo `pwd`
-      - which test.sh
       - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/test.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
