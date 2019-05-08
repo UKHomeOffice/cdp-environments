@@ -1,2 +1,0 @@
-  annotations:
-    downscaler/uptime: Mon-Fri 08:00-19:00 Europe/London
