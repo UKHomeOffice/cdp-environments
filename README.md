@@ -41,6 +41,19 @@ docker run -it --rm -v `pwd`:/cdp-environments quay.io/ukhomeofficedigital/cdp-c
 export DEPLOY_TO=cdp-dev
 ./deploy.sh 
 ```
+Running performance tests from your local machine
+-------------------------------------------------
+
+1. Edit the file to contain your secrets (`deploy.cfg` - use [`deploy.template.cfg`](./deploy.template.cfg) as a template).
+
+2. Run the test script, providing the environment you wish to deploy (e.g. `cdp-dev`) as the second parameter to the docker container's deploy.sh script.
+The docker container's working directory should be the base of the [cdp-environments](https://github.com/UKHomeOffice/cdp-environments) repo.
+It should be mounted as a volume provided to the `test.sh` script as the first parameter.
+
+```shell
+export PERF_TEST_NAME=e2e-deploy-perf-test
+docker run -it -e PERF_TEST_NAME --rm -v `pwd`:/cdp-environments quay.io/ukhomeofficedigital/cdp-ci test.sh /cdp-environments cdp-dev
+```
 
 
 Adding a new component
