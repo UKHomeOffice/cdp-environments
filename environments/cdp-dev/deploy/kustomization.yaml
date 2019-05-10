@@ -14,9 +14,10 @@ generatorOptions:
 configMapGenerator:
   - name: tinkerpop-graphdb-schema-loader
     files:
-      - cdp-deployment-templates/conf-template/graphdb/persona/schema-loader/gremlin-server.yml
+      - cdp-deployment-templates/conf-template/graphdb/persona/schema-loader/gremlin-server-embedded.yml
       - cdp-deployment-templates/conf-template/graphdb/persona/schema-loader/graph-schema.json
-      - cdp-deployment-templates/conf-template/graphdb/common/janusgraph-dynamodb.properties
+      - cdp-deployment-templates/conf-template/graphdb/common/janusgraph-embedded.properties
+      - cdp-deployment-templates/conf-template/graphdb/common/embedded-backend.yaml
 
 # secretGenerator used to push AWS creds to k8s on the command line
 # when running from Drone, assuming the secret has already been created
