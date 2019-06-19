@@ -20,7 +20,7 @@ pipeline:
       - kube_server
       - kube_token
     commands:
-      - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
+      - /usr/bin/deploy.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
       event: [push, deployment]
       # branch: [master]
@@ -30,6 +30,10 @@ pipeline:
     secrets:
       - kube_server
       - kube_token
+      - keycloak_url
+      - keycloak_client_id
+      - keycloak_client_secret
+      - keycloak_realm
     commands:
       - PERF_TEST_NAME=${PERF_TEST_NAME} /usr/bin/test.sh `pwd` ${DEFAULT_ENVIRONMENT}
     when:
