@@ -9,3 +9,6 @@ configMapGenerator:
     files:
       - cdp-deployment-templates/conf-template/taurus/graphdb/component-test.yml
       - cdp-deployment-templates/conf-template/taurus/graphdb/graph-add-persons.csv
+  - name: bzt-tests-scripts
+    files:
+      - cdp-deployment-templates/scripts/bzt/run-bzt.sh
